@@ -12,5 +12,5 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 add_library(glad STATIC source/glad.c)
 
-add_subdirectory(lessons/HelloTriangle)
+add_subdirectory(lessons/HelloWindow)
 

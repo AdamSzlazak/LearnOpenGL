@@ -1,6 +1,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <time.h>
+#include <stdlib.h>
+
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -21,6 +24,7 @@ const char *fragmentShaderSource = "#version 330 core\n"
 int main(int argc, char **argv)
 {
 
+	srand(time(NULL));
 	if (!glfwInit())
 	{
 		std::cerr << "Failed to init glfw\n";
@@ -106,7 +110,7 @@ int main(int argc, char **argv)
 	{
 		processInput(window);
 
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		// glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(shaderProgram);
@@ -124,6 +128,11 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
+float randColor(void)
+{
+	float randomValue = (rand()%100)/100.0F;
+	return randomValue;
+}
 void processInput(GLFWwindow *window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -144,5 +153,14 @@ void processInput(GLFWwindow *window)
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClearColor(0.0F, 0.0F, 1.0F, 1.0F);
+	}
+	else if(glfwGetKey(window,GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
+		float redColor = randColor();
+		float greenColor = randColor();
+		float blueColor = randColor();
+
+		glClearColor(redColor,greenColor,blueColor,1.0F);
 	}
 }
